@@ -3,35 +3,48 @@ package module2;
 
 public class Task2 {
 
-    static int[] balances = {1200, 250, 2000, 500, 3200};
+    static double[] balances = {1200, 250, 2000, 500, 3200};
     static String[] ownerNames = {"Jane", "Ann", "Jack", "Oww", "Lane"};
 
-
     //HOMEWORK 2.1
-    static double withdrawBalance(double balance, double withdrawal) {
+    static String withdrawBalance(double balance, double withdrawal) {
         double commission = withdrawal * 0.05;
+        String message;
+        if (balance >  withdrawal + commission) {
+            balance = balance - withdrawal - commission;
+            message = "OK " + commission + " " + balance;
+        } else message = "NO";
 
-        return balance - withdrawal - commission;
+        return message;
+
     }
 
     //HOMEWORK 2.2
-    static double withdrawBalance(String ownerName, double withdrawal) {
-        double ownerBalance = balances[getOwnerPosition(ownerName)];
+    static String withdrawBalance(String ownerName, double withdrawal) {
+        double commission = withdrawal * 0.05;
+        String message;
 
-        return withdrawBalance(ownerBalance, withdrawal);
+        if (balances[getOwnerPosition(ownerName)] > withdrawal + commission) {
+            balances[getOwnerPosition(ownerName)] = balances[getOwnerPosition(ownerName)] - withdrawal - commission;
+            message = ownerName + " " + withdrawal + " " + balances[getOwnerPosition(ownerName)];
+        } else message = ownerName + " NO";
+
+        return message;
+
     }
 
     //HOMEWORK 2.3
-    static double fundBalance(String ownerName, double fund) {
-        double ownerBalance = balances[getOwnerPosition(ownerName)];
+    static String fundBalance(String ownerName, double fund) {
 
-        return ownerBalance + fund;
+        balances[getOwnerPosition(ownerName)] = balances[getOwnerPosition(ownerName)] + fund;
+        return ownerName + " " + balances[getOwnerPosition(ownerName)];
+
     }
 
     static int getOwnerPosition(String ownerName) {
         int k = 0;
         for (int i = 0; i < ownerNames.length; i++) {
-            if (ownerName.equalsIgnoreCase(ownerNames[i])) k = i;
+            if (ownerName == ownerNames[i]) k = i;
         }
         return k;
     }
@@ -40,21 +53,12 @@ public class Task2 {
     public static void main(String[] args) {
         int balance = 400;
         double fund = 100;
-        double withdrawal = 100;
+        double withdrawal = 240;
         String ownerName = "Ann";
-        double commission = withdrawal *0.05;
-        double balanceAfter;
 
-        balanceAfter = withdrawBalance(balance, withdrawal);            //2.1
-        if (balanceAfter > 0) System.out.println("OK " + commission + " " + balanceAfter);
-        else System.out.println("NO");
-
-        balanceAfter = withdrawBalance(ownerName, withdrawal);   //2.2
-        if (balanceAfter > 0) System.out.println(ownerName + " " + withdrawal + " " + balanceAfter);
-        else System.out.println(ownerName + " NO");
-
-        balanceAfter = fundBalance(ownerName, fund);                    //2.3
-        System.out.println(ownerName + " " + balanceAfter);
+        System.out.println(withdrawBalance(balance,withdrawal));
+        System.out.println(withdrawBalance(ownerName, withdrawal));
+        System.out.println(fundBalance(ownerName, fund));
 
     }
 }
