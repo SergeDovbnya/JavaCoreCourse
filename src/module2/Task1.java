@@ -1,7 +1,5 @@
 package module2;
 
-import java.util.stream.IntStream;
-
 public class Task1 {
 
     static int sum(int array[]) {
@@ -75,8 +73,8 @@ public class Task1 {
         return maxPositiveValue;
     }
 
-    static int multiplication(int array[]) {
-        int multiplyResult = 1;
+    static long multiplication(int array[]) {
+        long multiplyResult = 1;
         for (int item: array) {
             multiplyResult *= item;
         }
