@@ -1,6 +1,5 @@
 package module2;
 
-
 public class Task2 {
 
     static double[] balances = {1200, 250, 2000, 500, 3200};
@@ -9,36 +8,27 @@ public class Task2 {
     //HOMEWORK 2.1
     static String withdrawBalance(double balance, double withdrawal) {
         double commission = withdrawal * 0.05;
-        String message;
         if (balance >  withdrawal + commission) {
             balance = balance - withdrawal - commission;
-            message = "OK " + commission + " " + balance;
-        } else message = "NO";
-
-        return message;
-
+            return "OK " + commission + " " + balance;
+        } else return "NO";
     }
 
     //HOMEWORK 2.2
     static String withdrawBalance(String ownerName, double withdrawal) {
         double commission = withdrawal * 0.05;
-        String message;
-
-        if (balances[getOwnerPosition(ownerName)] > withdrawal + commission) {
-            balances[getOwnerPosition(ownerName)] = balances[getOwnerPosition(ownerName)] - withdrawal - commission;
-            message = ownerName + " " + withdrawal + " " + balances[getOwnerPosition(ownerName)];
-        } else message = ownerName + " NO";
-
-        return message;
-
+        int ownerPosition = getOwnerPosition(ownerName);
+        if (balances[ownerPosition] > withdrawal + commission) {
+            balances[ownerPosition] = balances[ownerPosition] - withdrawal - commission;
+            return ownerName + " " + withdrawal + " " + balances[ownerPosition];
+        } else return ownerName + " NO";
     }
 
     //HOMEWORK 2.3
     static String fundBalance(String ownerName, double fund) {
-
-        balances[getOwnerPosition(ownerName)] = balances[getOwnerPosition(ownerName)] + fund;
-        return ownerName + " " + balances[getOwnerPosition(ownerName)];
-
+        int ownerPosition = getOwnerPosition(ownerName);
+        balances[ownerPosition] = balances[ownerPosition] + fund;
+        return ownerName + " " + balances[ownerPosition];
     }
 
     static int getOwnerPosition(String ownerName) {
@@ -59,6 +49,5 @@ public class Task2 {
         System.out.println(withdrawBalance(balance,withdrawal));
         System.out.println(withdrawBalance(ownerName, withdrawal));
         System.out.println(fundBalance(ownerName, fund));
-
     }
 }

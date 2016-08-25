@@ -1,5 +1,7 @@
 package module2;
 
+import java.text.DecimalFormat;
+
 public class Task1 {
 
     static int sum(int array[]) {
@@ -94,7 +96,8 @@ public class Task1 {
     }
 
     static double modulus(double array[]) {
-        return array[array.length - 1]%array[0];
+        DecimalFormat df = new DecimalFormat("#.##");
+        return Double.valueOf(df.format(array[array.length - 1]%array[0]));
     }
 
     static int secondLargest(int array[]) {
