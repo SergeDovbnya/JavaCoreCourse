@@ -17,25 +17,6 @@ public class User {
         this.currency = currency;
     }
 
-    void paySallary() {
-        setBalance(balance + salary);
-    }
-
-    void withdraw(int summ) {
-        double commission;
-        if (summ < 1000) commission = summ * 0.05;
-        else commission = summ * 0.1;
-        if (balance >  summ + commission) setBalance(balance - summ - commission);
-    }
-
-    int companyNameLength() {
-        return companyName.length();
-    }
-
-    void monthIncreaser(int addMonth) {
-        setMonthsOfEmployment(monthsOfEmployment + addMonth);
-    }
-
     public String getName() {
         return name;
     }
@@ -82,5 +63,24 @@ public class User {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    void paySallary() {
+        setBalance(balance + salary);
+    }
+
+    void withdraw(int summ) {
+        double commission;
+        if (summ < 1000) commission = summ * 0.05;
+        else commission = summ * 0.1;
+        if (balance >  summ + commission) setBalance(balance - summ - commission);
+    }
+
+    int companyNameLength() {
+        return companyName.length();
+    }
+
+    void monthIncreaser(int addMonth) {
+        setMonthsOfEmployment(monthsOfEmployment + addMonth);
     }
 }
