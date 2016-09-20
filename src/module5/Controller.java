@@ -13,19 +13,19 @@ public class Controller {
         Room[] result1 = new Room[5];
         Room[] result2 = new Room[5];
         Room[] result3 = new Room[5];
-        Room[][] result = {result1, result2, result3};
-        Room[] res = new Room[15];
+        Room[][] arrayOfResults = {result1, result2, result3};
+        Room[] result = new Room[15];
         DAO dao = new DAOImpl();
 
         for (int i = 0; i < apis.length; i++) {
-            result[i] = apis[i].findRooms(price, persons, city, hotel);
-            for (Room room : result[i]) {
+            arrayOfResults[i] = apis[i].findRooms(price, persons, city, hotel);
+            for (Room room : arrayOfResults[i]) {
                 if (room != null) dao.save(room);
             }
-            System.arraycopy(result[i], 0, res, i*5, result[i].length);
+            System.arraycopy(arrayOfResults[i], 0, result, i*5, arrayOfResults[i].length);
         }
-        System.out.println(Arrays.deepToString(res));
-        return  res;
+        System.out.println(Arrays.deepToString(result));
+        return  result;
     }
 
     Room[] check(API api1, API api2) {

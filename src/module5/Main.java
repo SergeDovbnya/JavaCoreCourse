@@ -11,7 +11,6 @@ public class Main {
         controller.requestRooms(300, 1, "Kyiv", "Stolychnyi");
         controller.requestRooms(200, 2, "Korsun", null);
         controller.requestRooms(400, 3, "sdaf", null);
-
         controller.check(bookingAPI, tripAPI);
         controller.check(tripAPI, googleAPI);
         controller.check(googleAPI, bookingAPI);
