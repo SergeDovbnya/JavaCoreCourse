@@ -7,11 +7,11 @@ public class GoogleAPI implements API{
     private Date date = new Date(116, 10, 15);
 
     public GoogleAPI() {
-        Room room1 = new Room(1, 200, 2, date, "Kooperator", "Korsun");
+        Room room1 = new Room(1, 250, 2, date, "Kooperator", "Korsun");
         Room room2 = new Room(2, 300, 1, date, "Stolychnyi", "Kyiv");
-        Room room3 = new Room(3, 250, 2, date, "Arena", "Kherson");
-        Room room4 = new Room(4, 400, 3, date, "Vody", "Valyava");
-        Room room5 = new Room(5, 350, 2, date, "Pechera", "Lviv");
+        Room room3 = new Room(3, 250, 3, date, "Arena", "Kherson");
+        Room room4 = new Room(4, 400, 1, date, "Vody", "Valyava");
+        Room room5 = new Room(5, 325, 2, date, "Pechera", "Lviv");
         rooms[0] = room1;
         rooms[1] = room2;
         rooms[2] = room3;
