@@ -1,6 +1,10 @@
 package module2;
 
+import module6.ArraysUtils;
+
 import java.text.DecimalFormat;
+import java.text.FieldPosition;
+import java.util.Arrays;
 
 public class Task1 {
 
@@ -133,12 +137,21 @@ public class Task1 {
         int[] arrayOfInt = {2, 10, 65, 31, 10, -5, 17, 98, -30, 35};
         double[] arrayOfDouble = {2.1, 3.15, 7.99, 8, -3.333, 15.35, -20.001, 10, 99.99, 61.69};
 
-        System.out.println("Sum " + sum(arrayOfInt) + " " + sum(arrayOfDouble));
+        /*System.out.println("Sum " + sum(arrayOfInt) + " " + sum(arrayOfDouble));
         System.out.println("Min " + min(arrayOfInt) + " " + min(arrayOfDouble));
         System.out.println("Max " + max(arrayOfInt) + " " + max(arrayOfDouble));
         System.out.println("MaxPositive " + maxPositive(arrayOfInt) + " " + maxPositive(arrayOfDouble));
         System.out.println("Multiply " + multiplication(arrayOfInt) + " " + multiplication(arrayOfDouble));
         System.out.println("Modulus " + modulus(arrayOfInt) + " " + modulus(arrayOfDouble));
-        System.out.println("Secound Largest " + secondLargest(arrayOfInt) + " " + secondLargest(arrayOfDouble));
+        System.out.println("Secound Largest " + secondLargest(arrayOfInt) + " " + secondLargest(arrayOfDouble));*/
+        System.out.println("Sum " + ArraysUtils.sum(arrayOfInt));
+        System.out.println("Min " + ArraysUtils.min(arrayOfInt));
+        System.out.println("Max " + ArraysUtils.max(arrayOfInt));
+        System.out.println("MaxPositive " + ArraysUtils.maxPositive(arrayOfInt));
+        System.out.println("Multiply " + ArraysUtils.multiplication(arrayOfInt));
+        System.out.println("Modulus " + ArraysUtils.modulus(arrayOfInt));
+        System.out.println("Secound Largest " + ArraysUtils.secondLargest(arrayOfInt));
+        System.out.println("Reverse array " + Arrays.toString(ArraysUtils.reverse(arrayOfInt)));
+        System.out.println("Find even elements " + Arrays.toString(ArraysUtils.findEvenElements(arrayOfInt)));
     }
 }
