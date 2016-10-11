@@ -43,4 +43,12 @@ public class User {
         result = 31 * result + balance;
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", city='" + city + '\'' +
+                '}';
+    }
 }

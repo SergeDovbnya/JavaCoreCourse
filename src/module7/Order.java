@@ -56,6 +56,10 @@ public class Order implements Comparable {
     public String toString() {
         return "Order{" +
                 "id=" + id +
+                ", price=" + price +
+                ", currency=" + currency +
+                ", shopIdentificator='" + shopIdentificator + '\'' +
+                ", user=" + user +
                 '}';
     }
 
