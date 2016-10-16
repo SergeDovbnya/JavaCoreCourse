@@ -1,6 +1,8 @@
 package module7.module5;
 
+import java.util.List;
+
 public interface API {
-    Room[] findRooms(int price, int persons, String city, String hotel);
-    Room[] getAllRooms();
+    List<Room> findRooms(int price, int persons, String city, String hotel);
+    List<Room> getAllRooms();
 }

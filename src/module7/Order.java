@@ -2,7 +2,7 @@ package module7;
 
 import module4.Currency;
 
-public class Order implements Comparable {
+public class Order implements Comparable<Order> {
     private long id;
     private int price;
     private Currency currency;
@@ -20,8 +20,8 @@ public class Order implements Comparable {
     }
 
     @Override
-    public int compareTo(Object o) {
-        return 0;
+    public int compareTo(Order o) {
+        return o.getPrice() - this.price;
     }
 
     @Override
@@ -57,9 +57,10 @@ public class Order implements Comparable {
         return "Order{" +
                 "id=" + id +
                 ", price=" + price +
-                ", currency=" + currency +
-                ", shopIdentificator='" + shopIdentificator + '\'' +
-                ", user=" + user +
+//                ", item name=" + itemName +
+//                ", currency=" + currency +
+//                ", shop identificator='" + shopIdentificator + '\'' +
+//                ", user city=" + user.getCity() +
                 '}';
     }
 

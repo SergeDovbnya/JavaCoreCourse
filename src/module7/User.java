@@ -19,6 +19,10 @@ public class User {
         return city;
     }
 
+    public String getLastName() {
+        return lastName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

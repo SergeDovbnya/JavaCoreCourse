@@ -1,40 +1,35 @@
 package module7.module5;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class TripAdvisorAPI implements API {
-    private Room[] rooms = new Room[5];
+    private List<Room> rooms = new ArrayList<>();
     private Date date = new Date(116, 11, 15);
 
     public TripAdvisorAPI() {
-        Room room1 = new Room(1, 200, 2, date, "Kooperator", "Chygyryn");
-        Room room2 = new Room(2, 300, 1, date, "Stolychnyi", "Kyiv");
-        Room room3 = new Room(3, 250, 3, date, "Arena", "Kherson");
-        Room room4 = new Room(4, 400, 3, date, "Vody", "Valyava");
-        Room room5 = new Room(5, 350, 2, date, "Pechera", "Lviv");
-        rooms[0] = room1;
-        rooms[1] = room2;
-        rooms[2] = room3;
-        rooms[3] = room4;
-        rooms[4] = room5;
+        rooms.add(new Room(1, 200, 2, date, "Kooperator", "Chygyryn"));
+        rooms.add(new Room(2, 300, 1, date, "Stolychnyi", "Kyiv"));
+        rooms.add(new Room(3, 250, 3, date, "Arena", "Kherson"));
+        rooms.add(new Room(4, 400, 3, date, "Vody", "Valyava"));
+        rooms.add(new Room(5, 350, 2, date, "Pechera", "Lviv"));
     }
 
     @Override
-    public Room[] findRooms(int price, int persons, String city, String hotel) {
-        Room[] result = new Room[5];
+    public List<Room> findRooms(int price, int persons, String city, String hotel) {
+        List<Room> result = new ArrayList<>();
         Room room = new Room(0, price, persons, null, hotel, city);
-        int i = 0;
         for (Room room1: rooms) {
             if (room.equals(room1)) {
-                result[i] = room1;
-                i++;
+                result.add(room1);
             }
         }
         return result;
     }
 
     @Override
-    public Room[] getAllRooms() {
+    public List<Room> getAllRooms() {
         return rooms;
     }
 }

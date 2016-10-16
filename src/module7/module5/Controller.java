@@ -1,48 +1,38 @@
 package module7.module5;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class Controller {
-    private API apis[] = new API[3];
+    private List<API> apis = new ArrayList<>();
 
-    public Controller(API[] apis) {
+    public Controller(List<API> apis) {
         this.apis = apis;
     }
 
-    Room[] requestRooms(int price, int persons, String city, String hotel) {
-        Room[] result1 = new Room[5];
-        Room[] result2 = new Room[5];
-        Room[] result3 = new Room[5];
-        Room[][] arrayOfResults = {result1, result2, result3};
-        Room[] result = new Room[15];
+    List<Room> requestRooms(int price, int persons, String city, String hotel) {
+        List<Room> result = new ArrayList<>();
         DAO dao = new DAOImpl();
 
-        for (int i = 0; i < apis.length; i++) {
-            arrayOfResults[i] = apis[i].findRooms(price, persons, city, hotel);
-            for (Room room : arrayOfResults[i]) {
-                if (room != null) dao.save(room);
-            }
-            System.arraycopy(arrayOfResults[i], 0, result, i*5, arrayOfResults[i].length);
+        for (API api: apis) {
+            result.addAll(api.findRooms(price, persons, city, hotel));
         }
-        System.out.println(Arrays.deepToString(result));
-        return  result;
+        System.out.println(result);
+//        Room room = new Room(2, price, persons, new Date(), hotel, city);
+//        result.forEach(dao::save);
+//        dao.delete(result.get(0));
+//        dao.update(room);
+        return result;
     }
 
-    Room[] check(API api1, API api2) {
-        int i = 0;
-        Room[] result = new Room[10];
-        Room[] rooms1 = api1.getAllRooms();
-        Room[] rooms2 = api2.getAllRooms();
+    List<Room> check(API api1, API api2) {
+        Set<Room> set = new HashSet<>();
+        List<Room> result = new ArrayList<>();
+        List<Room> roomList = new ArrayList<>();
 
-        for (Room room1: rooms1) {
-            for (Room room2: rooms2) {
-                if (room1.equals(room2)) {
-                    result[i] = room2;
-                    i++;
-                }
-            }
-        }
-        System.out.println(Arrays.deepToString(result));
+        roomList.addAll(api1.getAllRooms());
+        roomList.addAll(api2.getAllRooms());
+        roomList.forEach((room -> {if (!set.add(room)) result.add(room);}));
+        System.out.println(result);
         return result;
     }
 }
