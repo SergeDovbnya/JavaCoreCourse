@@ -20,7 +20,7 @@ public class Main {
         User user9 = new User(10, "Amanda", "Gregory", "San Francisco", 2033);
         Order order = new Order(1, 600, Currency.EUR, "IPhone", "Apple", user);
         Order order1 = new Order(2, 15, Currency.USD, "Wine", "Spirits & Liquor", user1);
-        Order order2 = new Order(3, 200, Currency.EUR, "GiroBoard", "Citrus", user2);
+        Order order2 = new Order(2, 15, Currency.USD, "Wine", "Spirits & Liquor", user1);
 //        Order order2 = new Order(3, 200, Currency.EUR, "GiroBoard", "Citrus", user2);
         Order order3 = new Order(4, 99, Currency.USD, "Trampoline", "Amazon", user3);
         Order order4 = new Order(4, 99, Currency.USD, "Trampoline", "Amazon", user3);
@@ -72,9 +72,8 @@ public class Main {
         System.out.println("List without duplicates " + list.size());
 
 //        delete items where price less than 1500
-        Iterator<Order> iterator = list.listIterator();
-        while (iterator.hasNext()) {
-            if (iterator.next().getPrice() < 1500) iterator.remove();
+        for (Iterator<Order> it = list.listIterator(); it.hasNext();) {
+            if (it.next().getPrice() < 1500) it.remove();
         }
         System.out.println("Orders only with price more than 1500" + list);
 
@@ -93,62 +92,20 @@ public class Main {
 
 //        check if set contain Order where User’s lastName is - “Petrov”
         boolean flag = false;
-        Iterator<Order> iterator2 = set.iterator();
-        while (iterator2.hasNext()) {
-            if (iterator2.next().getUser().getLastName() == "Petrov") flag=true;
+        String searchedName = "Petrov";
+        for (Iterator<Order> it = set.iterator(); it.hasNext();) {
+            if (it.next().getUser().getLastName() == searchedName) flag=true;
         }
-        System.out.println("Set contains Petrov? " + flag);
+        System.out.println("Set contains Petrov? -" + flag);
 
 //        print Order with largest price using only one set method - get
-        Iterator iterator3 = set.iterator();
-        System.out.println("Order with largest price " + iterator3.next());
+        Iterator iterator = set.iterator();
+        System.out.println("Order with largest price " + iterator.next());
 
 //        delete orders where currency is USD using Iterator
-        Iterator<Order> iterator1 = set.iterator();
-        while (iterator1.hasNext()) {
-            if (iterator1.next().getCurrency() == Currency.USD) iterator1.remove();
+        for (Iterator<Order> it = set.iterator(); it.hasNext();) {
+            if (it.next().getCurrency() == Currency.USD) it.remove();
         }
         System.out.println("Orders without USD " + set);
-
-
-
-//        Extra Homework
-
-        List<Integer> integerArrayList = new ArrayList<>();
-        List<String> stringArrayList = new ArrayList<>();
-        List<Integer> integerLinkedList = new LinkedList<>();
-        List<String> stringLinkedList = new LinkedList<>();
-        int counter1 = 1000;
-        int counter2 = 10000;
-        Random randomInt = new Random();
-        String someString = "SomeString";
-        while (counter1 > 0) {
-            integerArrayList.add(randomInt.nextInt());
-            stringArrayList.add(someString);
-            integerLinkedList.add(randomInt.nextInt());
-            stringLinkedList.add(someString);
-            counter1--;
-        }
-
-        long start = System.currentTimeMillis();
-
-        while (counter1 > 0) {
-            integerArrayList.add(randomInt.nextInt());
-            counter1--;
-        }
-
-        long finish = System.currentTimeMillis();
-        System.out.println(finish - start + " add operation in integer ArrayList with 1000 Elements");
-
-
-
-
-        while (counter2 > 0) {
-            integerArrayList.add(randomInt.nextInt());
-            stringArrayList.add(someString);
-            integerLinkedList.add(randomInt.nextInt());
-            stringLinkedList.add(someString);
-            counter2--;
-        }
     }
 }
