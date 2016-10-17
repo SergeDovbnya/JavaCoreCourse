@@ -17,20 +17,18 @@ public class Main {
         User user6 = new User(7, "Steven", "Byrd", "Essex", 4621);
         User user7 = new User(8, "Jeffrey", "Garza", "Capetown", 3215);
         User user8 = new User(9, "Ivan", "Petrov", "Moscow", 7850);
-        User user9 = new User(10, "Amanda", "Gregory", "San Francisco", 2033);
-        Order order = new Order(1, 600, Currency.EUR, "IPhone", "Apple", user);
-        Order order1 = new Order(2, 15, Currency.USD, "Wine", "Spirits & Liquor", user1);
-        Order order2 = new Order(2, 15, Currency.USD, "Wine", "Spirits & Liquor", user1);
-//        Order order2 = new Order(3, 200, Currency.EUR, "GiroBoard", "Citrus", user2);
-        Order order3 = new Order(4, 99, Currency.USD, "Trampoline", "Amazon", user3);
-        Order order4 = new Order(4, 99, Currency.USD, "Trampoline", "Amazon", user3);
-//        Order order4 = new Order(5, 20, Currency.EUR, "Gym membership", "Athlete", user4);
-        Order order5 = new Order(6, 1199, Currency.USD, "DJI Phantom 4", "DJI", user5);
-        Order order6 = new Order(7, 15, Currency.USD, "Kitchen Scale", "Ebay", user6);
-        Order order7 = new Order(8, 700, Currency.EUR, "IPhone", "Apple", user7);
-        Order order8 = new Order(9, 3999, Currency.USD, "Pinball machine", "Ebay", user8);
-        Order order9 = new Order(10, 2000, Currency.EUR, "A decent espresso maker", "Amazon", user9);
-        List<Order> list = new ArrayList<>(Arrays.asList(order, order1, order2, order3, order4, order5, order6, order7, order8, order9));
+        User user9 = new User(10, "Amanda", "Gregory", "New York", 2033);
+        List<Order> list = new ArrayList<>();
+        list.add(new Order(1, 600, Currency.EUR, "IPhone", "Apple", user));
+        list.add(new Order(2, 15, Currency.USD, "Wine", "Spirits & Liquor", user1));
+        list.add(new Order(2, 15, Currency.USD, "Wine", "Spirits & Liquor", user1));
+        list.add(new Order(4, 99, Currency.USD, "Trampoline", "Amazon", user3));
+        list.add(new Order(4, 99, Currency.USD, "Trampoline", "Amazon", user3));
+        list.add(new Order(6, 1500, Currency.USD, "DJI Phantom 4", "DJI", user5));
+        list.add(new Order(7, 15, Currency.USD, "Kitchen Scale", "Ebay", user6));
+        list.add(new Order(8, 700, Currency.EUR, "IPhone", "Apple", user7));
+        list.add(new Order(9, 3999, Currency.USD, "Pinball machine", "Ebay", user8));
+        list.add(new Order(10, 2000, Currency.EUR, "A decent espresso maker", "Amazon", user9));
         Set<Order> set = new TreeSet<>(list);
 
         list.sort(new Comparator<Order>() {
@@ -66,10 +64,10 @@ public class Main {
 
 //        deleting duplicates in list
         Set<Order> set1 = new LinkedHashSet<>(list);
-        System.out.println("List with duplicates " + list.size());
+        System.out.println("List with duplicates contains " + list.size() + " orders");
         list.clear();
         list.addAll(set1);
-        System.out.println("List without duplicates " + list.size());
+        System.out.println("List without duplicates contains " + list.size() + " orders");
 
 //        delete items where price less than 1500
         for (Iterator<Order> it = list.listIterator(); it.hasNext();) {
@@ -88,7 +86,20 @@ public class Main {
         System.out.println("List, where currency is USD" + usdList);
 
 //        separate list for as many lists as many unique cities are in User
-
+        List<List<Order>> uniqueCities = new ArrayList<>();
+        Set<String> cities = new TreeSet<>();
+        List<Order> temp;
+        for (Iterator<Order> it = list.listIterator(); it.hasNext();) {
+            cities.add(it.next().getUser().getCity());
+        }
+        for (String item: cities) {
+            temp = new ArrayList<>();
+            uniqueCities.add(temp);
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).getUser().getCity() == item) temp.add(list.get(i));
+            }
+        }
+        System.out.println("List by unique cities " + uniqueCities);
 
 //        check if set contain Order where User’s lastName is - “Petrov”
         boolean flag = false;

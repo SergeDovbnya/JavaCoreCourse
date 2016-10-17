@@ -60,7 +60,7 @@ public class Order implements Comparable<Order> {
 //                ", item name=" + itemName +
 //                ", currency=" + currency +
 //                ", shop identificator='" + shopIdentificator + '\'' +
-//                ", user city=" + user.getCity() +
+                ", user city=" + user.getCity() +
                 '}';
     }
 
