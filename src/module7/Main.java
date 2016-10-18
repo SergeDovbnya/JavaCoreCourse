@@ -1,7 +1,5 @@
 package module7;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
-import module4.*;
 import module4.Currency;
 
 import java.util.*;
