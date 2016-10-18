@@ -1,10 +1,13 @@
 package module8;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AbstractDAOImpl<T> implements AbstractDAO<T> {
-    private List<T> list = new ArrayList<T>();
+    private List<T> list;
+
+    public AbstractDAOImpl(List<T> list) {
+        this.list = list;
+    }
 
     @Override
     public T save(T t) {
@@ -31,4 +34,20 @@ public class AbstractDAOImpl<T> implements AbstractDAO<T> {
     public List<T> getlist() {
         return list;
     }
+
+    @Override
+    public void deleteById(long id) {
+        delete(get(id));
+    }
+
+    @Override
+    public T get(long id) {
+//        How to implement t.getId?
+//        for (T t:list) {
+//            if (t.getId() == id) return t;
+//        }
+        return null;
+    }
+
+
 }
