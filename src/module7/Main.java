@@ -70,9 +70,10 @@ public class Main {
         System.out.println("List without duplicates contains " + list.size() + " orders");
 
 //        delete items where price less than 1500
-        for (Iterator<Order> it = list.listIterator(); it.hasNext();) {
-            if (it.next().getPrice() < 1500) it.remove();
-        }
+        list.removeIf(order -> order.getPrice() < 1500);
+//        for (Iterator<Order> it = list.listIterator(); it.hasNext();) {
+//            if (it.next().getPrice() < 1500) it.remove();
+//        }
         System.out.println("Orders only with price more than 1500" + list);
 
 //        separate list by Currency
@@ -114,9 +115,10 @@ public class Main {
         System.out.println("Order with largest price " + iterator.next());
 
 //        delete orders where currency is USD using Iterator
-        for (Iterator<Order> it = set.iterator(); it.hasNext();) {
-            if (it.next().getCurrency() == Currency.USD) it.remove();
-        }
+        set.removeIf(order -> order.getCurrency() == Currency.USD);
+//        for (Iterator<Order> it = set.iterator(); it.hasNext();) {
+//            if (it.next().getCurrency() == Currency.USD) it.remove();
+//        }
         System.out.println("Orders without USD " + set);
     }
 }

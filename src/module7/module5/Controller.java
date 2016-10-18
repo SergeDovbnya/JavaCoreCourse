@@ -25,13 +25,17 @@ public class Controller {
     }
 
     List<Room> check(API api1, API api2) {
-        Set<Room> set = new HashSet<>();
-        List<Room> result = new ArrayList<>();
-        List<Room> roomList = new ArrayList<>();
+//        Set<Room> set = new HashSet<>();
+//        List<Room> roomList = new ArrayList<>();
+//
+//        roomList.addAll(api1.getAllRooms());
+//        roomList.addAll(api2.getAllRooms());
+//        roomList.forEach((room -> {if (!set.add(room)) result.add(room);}));
 
-        roomList.addAll(api1.getAllRooms());
-        roomList.addAll(api2.getAllRooms());
-        roomList.forEach((room -> {if (!set.add(room)) result.add(room);}));
+        Set<Room> set1 = new HashSet<>(api1.getAllRooms());
+        Set<Room> set2 = new HashSet<>(api2.getAllRooms());
+        set1.retainAll(set2);
+        List<Room> result = new ArrayList<>(set1);
         System.out.println(result);
         return result;
     }
