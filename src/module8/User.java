@@ -1,6 +1,6 @@
 package module8;
 
-public class User {
+public class User implements GetId {
     private long id;
     private String name;
 

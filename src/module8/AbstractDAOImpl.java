@@ -2,7 +2,7 @@ package module8;
 
 import java.util.List;
 
-public class AbstractDAOImpl<T> implements AbstractDAO<T> {
+public class AbstractDAOImpl<T extends GetId> implements AbstractDAO<T> {
     private List<T> list;
 
     public AbstractDAOImpl(List<T> list) {
@@ -42,10 +42,9 @@ public class AbstractDAOImpl<T> implements AbstractDAO<T> {
 
     @Override
     public T get(long id) {
-//        How to implement t.getId?
-//        for (T t:list) {
-//            if (t.getId() == id) return t;
-//        }
+        for (T t:list) {
+            if (t.getId() == id) return t;
+        }
         return null;
     }
 
