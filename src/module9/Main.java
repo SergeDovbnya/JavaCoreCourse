@@ -1,4 +1,4 @@
-package module7;
+package module9;
 
 import module4.Currency;
 
@@ -62,25 +62,19 @@ public class Main {
         System.out.println("Sorted by itemName and ShopIdentificator and User city" + list);
 
 //        deleting duplicates in list
-        Set<Order> set1 = new LinkedHashSet<>(list);
         System.out.println("List with duplicates contains " + list.size() + " orders");
-        list.clear();
-        list.addAll(set1);
+        list = list.stream().distinct().collect(Collectors.toList());
         System.out.println("List without duplicates contains " + list.size() + " orders");
 
 //        delete items where price less than 1500
-        for (Iterator<Order> it = list.listIterator(); it.hasNext();) {
-            if (it.next().getPrice() < 1500) it.remove();
-        }
+        list.removeIf(order -> order.getPrice() < 1500);
         System.out.println("Orders only with price more than 1500" + list);
 
 //        separate list by Currency
         List<Order> usdList = new ArrayList<>();
         List<Order> eurList = new ArrayList<>();
-        for (Order order : list) {
-            if (order.getCurrency() == Currency.EUR) eurList.add(order);
-            else usdList.add(order);
-        }
+        eurList = list.stream().filter(order -> order.getCurrency() == Currency.EUR).collect(Collectors.toList());
+        usdList = list.stream().filter(order -> order.getCurrency() == Currency.USD).collect(Collectors.toList());
         System.out.println("List, where currency is EUR" + eurList);
         System.out.println("List, where currency is USD" + usdList);
 
@@ -113,9 +107,7 @@ public class Main {
         System.out.println("Order with largest price " + iterator.next());
 
 //        delete orders where currency is USD using Iterator
-        for (Iterator<Order> it = set.iterator(); it.hasNext();) {
-            if (it.next().getCurrency() == Currency.USD) it.remove();
-        }
+        set.removeIf(order -> order.getCurrency() == Currency.USD);
         System.out.println("Orders without USD " + set);
     }
 }
