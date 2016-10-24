@@ -30,84 +30,22 @@ public class Main {
         list.add(new Order(10, 2000, Currency.EUR, "A decent espresso maker", "Amazon", user10));
         Set<Order> set = new TreeSet<>(list);
 
-        list.sort(new Comparator<Order>() {
-            @Override
-            public int compare(Order o1, Order o2) {
-                return o2.getPrice() - o1.getPrice(); // sort list by Order price in decrease order
-            }
-        });
+        list = Utils.sortByPriceDecrease(list);
         System.out.println("Sorted by price in decreace order" + list);
-
-        list.sort(new Comparator<Order>() {
-            @Override
-            public int compare(Order o1, Order o2) {
-                int res = o1.getPrice() - o2.getPrice();
-                if (res == 0) return o1.getUser().getCity().compareTo(o2.getUser().getCity());
-                else return res;
-            }
-        });
+        list = Utils.sortByPriceIncreaseAndCity(list);
         System.out.println("Sorted by price in increase order and user city" + list);
-
-        list.sort(new Comparator<Order>() {
-            @Override
-            public int compare(Order o1, Order o2) {
-                int res = o1.getItemName().compareTo(o2.getItemName());
-                if (res == 0) {
-                    res = o1.getShopIdentificator().compareTo(o2.getShopIdentificator());
-                    if (res == 0) return o1.getUser().getCity().compareTo(o2.getUser().getCity());
-                    else return res;
-                } else return res;
-            }
-        });
+        list = Utils.sortByItemNameAndShopIdentificatorAndUserCity(list);
         System.out.println("Sorted by itemName and ShopIdentificator and User city" + list);
-
-//        deleting duplicates in list
         System.out.println("List with duplicates contains " + list.size() + " orders");
-        list = list.stream().distinct().collect(Collectors.toList());
+        list = Utils.deleteDuplicates(list);
         System.out.println("List without duplicates contains " + list.size() + " orders");
-
-//        delete items where price less than 1500
-        list.removeIf(order -> order.getPrice() < 1500);
+        list = Utils.deletePriceLess1500(list);
         System.out.println("Orders only with price more than 1500" + list);
-
-//        separate list by Currency
-        List<Order> usdList = new ArrayList<>();
-        List<Order> eurList = new ArrayList<>();
-        eurList = list.stream().filter(order -> order.getCurrency() == Currency.EUR).collect(Collectors.toList());
-        usdList = list.stream().filter(order -> order.getCurrency() == Currency.USD).collect(Collectors.toList());
-        System.out.println("List, where currency is EUR" + eurList);
-        System.out.println("List, where currency is USD" + usdList);
-
-//        separate list for as many lists as many unique cities are in User
-        List<List<Order>> uniqueCities = new ArrayList<>();
-        Set<String> cities = new HashSet<>();
-        List<Order> temp;
-        for (Iterator<Order> it = list.listIterator(); it.hasNext();) {
-            cities.add(it.next().getUser().getCity());
-        }
-        for (String city: cities) {
-            temp = new ArrayList<>();
-            uniqueCities.add(temp);
-            for (int i = 0; i < list.size(); i++) {
-                if (list.get(i).getUser().getCity() == city) temp.add(list.get(i));
-            }
-        }
-        System.out.println("List by unique cities " + uniqueCities);
-
-//        check if set contain Order where User’s lastName is - “Petrov”
-        boolean flag = false;
-        String searchedName = "Petrov";
-        for (Iterator<Order> it = set.iterator(); it.hasNext();) {
-            if (it.next().getUser().getLastName() == searchedName) flag=true;
-        }
-        System.out.println("Set contains Petrov? -" + flag);
-
-//        print Order with largest price using only one set method - get
-        Iterator iterator = set.iterator();
-        System.out.println("Order with largest price " + iterator.next());
-
-//        delete orders where currency is USD using Iterator
-        set.removeIf(order -> order.getCurrency() == Currency.USD);
+        System.out.println("List, separated by Currency" + Utils.separateByCurrency(list));
+        System.out.println("Map grouped by unique cities " + Utils.separateByCities(list));
+        System.out.println("Set contains Petrov? - " + Utils.checkName(set, "Petrov"));
+        System.out.println("Order with largest price " + Utils.getBiggestOrder(set));
+        set = Utils.deleteUsdOrders(set);
         System.out.println("Orders without USD " + set);
     }
 }
