@@ -4,15 +4,13 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Main {
+public class SecondMain {
     private static String filePath = "C:\\file.txt";
 
     private static String replacer(Map<String, String> map) {
         String replacedWords = "";
-        BufferedReader br = null;
 
-        try {
-            br = new BufferedReader(new FileReader(filePath));
+        try(BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
 
@@ -30,22 +28,13 @@ public class Main {
             }
         } catch (IOException e) {
             System.out.println("read failed");
-        } finally {
-            try {
-                if (br != null) br.close();
-            } catch (IOException e) {
-                System.out.println("can't close reade");
-            }
         }
 
         return replacedWords;
     }
 
     private static void fileContentReplacer(Map<String, String> map) {
-        BufferedReader br = null;
-
-        try {
-            br = new BufferedReader(new FileReader(filePath));
+        try(BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
 
@@ -66,20 +55,11 @@ public class Main {
             bw.close();
         } catch (IOException e) {
             System.out.println("read failed");
-        } finally {
-            try {
-                if (br != null) br.close();
-            } catch (IOException e) {
-                System.out.println("can't close reader");
-            }
         }
     }
 
     private static void fileContentMerger(Map<String, String> map) {
-        BufferedReader br = null;
-
-        try {
-            br = new BufferedReader(new FileReader(filePath));
+        try(BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
 
@@ -100,24 +80,15 @@ public class Main {
             bw.close();
         } catch (IOException e) {
             System.out.println("read failed");
-        } finally {
-            try {
-                if (br != null) br.close();
-            } catch (IOException e) {
-                System.out.println("can't close reade");
-            }
         }
     }
 
     private static int checkWord(String word) {
         int count = 0;
-        BufferedReader br = null;
         String line = "";
 
-        try {
-            br = new BufferedReader(new FileReader(filePath));
-            while((line = br.readLine()) != null)
-            {
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            while ((line = br.readLine()) != null) {
                 String[] words = line.split(" ");
 
                 for (String word1 : words) {
@@ -128,15 +99,8 @@ public class Main {
             }
             br.close();
         } catch (IOException e) {
-            System.out.println("read failed");
-        } finally {
-            try {
-                if (br != null)br.close();
-            } catch (IOException ex) {
-                System.out.println("couldn't close reader");
-            }
+            System.out.println("NullPointer exception");
         }
-
         return count;
     }
 
